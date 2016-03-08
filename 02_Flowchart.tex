@@ -1,0 +1,54 @@
+\documentclass{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{pdflscape}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+%\usetikzlibrary{external}
+%\tikzexternalize % activate!
+\begin{document}
+\pagestyle{empty}
+
+% Define block styles
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=7em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{cloud} = [draw, ellipse, fill=red!20, node distance=3cm,
+    minimum height=2em]
+\tikzstyle{cloud2} = [draw, ellipse, fill=red!20, 
+    text width = 6em, text centered, node distance=3cm,
+    minimum height=2em]
+\tikzstyle{cloud3} = [draw, ellipse, fill=green!20, 
+    text width = 8em, text centered, node distance=3cm,
+    minimum height=2em]
+\tikzstyle{arrow} = [ultra thick,->,>=stealth,]    
+
+    
+\begin{landscape}
+\begin{figure}
+\begin{tikzpicture}[node distance = 4cm, auto]
+% inner model
+\node [block](goals) at (-5, 6) {Achievement of personal goals};
+\node [block](coach) at (-5, 2) {Coaching};
+\node [block](tech) at (-5, -2) {Technology};
+\node [block](feed) at (-5, -6) {Quality of feedback};
+\node [block](success) at (0,0) {Success};   
+% outcome
+\node [cloud](gpa) at (5, 4) {GPA};
+\node [cloud](step1) at (5, 2) {Step 1};
+\node [cloud](step2) at (5, 0) {Step 2};
+\node [cloud](step3) at (5, -2) {Step 3};
+\node [cloud2](CBA) at (5, -4.5) {Competency-based\\ assessment};
+% survey questions
+\node [cloud3](Q11) at (-12, 4) {My Coach helps me to refine my learning goals.};
+\node [cloud3](Q12) at (-12, 1) {My Coach follows-up on my personalized learning plans.};
+% arrows
+\foreach \Q in {Q11, Q12} \draw [arrow] (\Q) -- node { } (coach);
+\foreach \pred in {goals, coach, tech, feed} \draw [arrow] (\pred) -- node { } (success);
+\foreach \out in {gpa, step1, step2, step3, CBA} \draw [arrow] (success) -- node { } (\out);
+\end{tikzpicture}
+%\caption{Path analysis diagram.  Our latent states are represented by blue boxes.  The observed predictors of success are green ovals and the observed measures of success are red ovals.}
+\label{path}
+\end{figure}
+\end{landscape}
+
+\end{document}
